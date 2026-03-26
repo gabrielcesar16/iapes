@@ -33,15 +33,11 @@ router.post("/login", async (req, res) => {
             })
         }
 
-        const token = jwt.sign(
-            {
-                id: user.id
-            },
-            process.env.JWT_SECRET  ,
-            {
-                expiresIn: process.env.JWT_EXPIRES_IN
-            }
+        const token = jwt.sign( 
+            { id: user.id }, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRES_IN}
         )
+
+        res.json({ token })
 
     } catch (err) {
         
@@ -51,7 +47,6 @@ router.post("/login", async (req, res) => {
 
     }
 })
-
 
 //ROTA PROTEGIDA
 router.get("/profile", auth, async (req, res) => {

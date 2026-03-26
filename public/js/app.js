@@ -1,5 +1,4 @@
-const API_URL = "http://localhost:3000"
-
+const API_URL = ""
 let token = ""
 
 function log(data) {
@@ -10,7 +9,7 @@ async function register() {
     const email = document.getElementById("registerEmail").value
     const password = document.getElementById("registerPassword").value
 
-    const res = await fetch(API_URL + "/users", {
+    const res = await fetch("/users", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -26,29 +25,41 @@ async function register() {
 }
 
 async function login() {
-    const email = document.getElementById("loginEmail").value
-    const password = document.getElementById("loginPassword").value
+    try {
 
-    const res = await fetch(API_URL + "/users/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            email,
-            password
-        })
+        const email = document.getElementById("loginEmail").value
+        const password = document.getElementById("loginPassword").value
+
+        //Response
+        const res = await fetch("/users/login", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ email, password})
     })
 
-    const data = await res.json()
+        const data = await res.json()
 
-    token = data.token
-    log(data)
+        if (!res.ok){
+            log(data)
+            return
+        }
 
+        //Salvar token
+        localStorage.setItem("token", data.token)
+
+        //REDIRECIONAMENTO
+        window.location.href = "/dashboard.html"
+    
+    } catch (err) {
+        console.error(err)
+        log({
+            error: "Erro no login"
+        })
+    } 
 }
 
 async function getProfile() {
-    const res = await fetch(API_URL + "/users/profile", {
+    const res = await fetch("/users/profile", {
         method: "GET",
         headers: {
             "authorization" : "Bearer " + token
