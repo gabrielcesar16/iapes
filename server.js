@@ -1,20 +1,11 @@
 require("dotenv").config()
 const express = require("express")
-const app = express()
 const cors = require("cors")
+const app = express()
+
 
 //BD import
-const pool = require("./config/db")
-
-//Route import
-const userRoutes = require("./routes/users")
-
-//ANTES DE QUALQUER ROTA AHHHHH!
-app.use(express.json())
-
-//Middleware de rota
-
-app.use("/users", userRoutes)
+//const pool = require("./config/db")
 
 // Middleware
 app.use(express.static("public"))
@@ -23,9 +14,17 @@ app.use(cors())
 app.use((err, req, res, next) => {
     console.error(err)
     res.status(500).json({
-        error: "Error intero"
+        error: "Error interno generalizado"
     })
 })
+
+
+//ANTES DE QUALQUER ROTA AHHHHH!
+app.use(express.json())
+
+//Route import
+const userRoutes = require("./routes/users")
+app.use("/users", userRoutes)
 
 //Rota básica
 app.get("/", (req, res) =>{
@@ -33,6 +32,7 @@ app.get("/", (req, res) =>{
 })
 
 // BD conn
+
 
 app.get("/db", async (req, res) => {
     try{

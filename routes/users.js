@@ -1,3 +1,4 @@
+/*
 const express = require("express")
 const router = express.Router()
 const pool = require("../config/db")
@@ -182,5 +183,16 @@ router.delete("/:id", async (req, res) => {
         
     }
 })
+
+module.exports = router
+
+*/
+
+const express = require("express")
+const router = express.Router()
+
+
+const userController = require ("../controllers/userController")
+router.post("/login", userController.login)
 
 module.exports = router
