@@ -1,3 +1,30 @@
+
+const express = require("express")
+const router = express.Router()
+const authMiddleware = require("../middlewares/auth")
+
+
+const userController = require ("../controllers/userController")
+router.post("/login", userController.login)
+router.post("/", userController.register)
+router.get("/profile", authMiddleware, userController.getProfile)
+
+router.post("/", (req, res) => {
+    console.log("REGISTER")
+})
+
+router.post("/login", (req, res) => {
+    console.log("LOGIN")
+})
+
+router.get("/profile", (req, res) => {
+    console.log("PROFILE")
+})
+
+
+
+module.exports = router
+
 /*
 const express = require("express")
 const router = express.Router()
@@ -187,12 +214,3 @@ router.delete("/:id", async (req, res) => {
 module.exports = router
 
 */
-
-const express = require("express")
-const router = express.Router()
-
-
-const userController = require ("../controllers/userController")
-router.post("/login", userController.login)
-
-module.exports = router

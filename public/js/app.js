@@ -11,9 +11,7 @@ async function register() {
 
     const res = await fetch("/users", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
             email,
             password
@@ -21,7 +19,10 @@ async function register() {
     })
 
     const data = await res.json()
-    log(data)
+    if(!res.ok) {
+        log(data)
+        return
+    }
 }
 
 async function login() {
@@ -44,8 +45,10 @@ async function login() {
             return
         }
 
-        //Salvar token
+        //Salvar token e user
         localStorage.setItem("token", data.token)
+        localStorage.setItem("user", JSON.stringify(data.user))
+
 
         //REDIRECIONAMENTO
         window.location.href = "/dashboard.html"
@@ -59,13 +62,18 @@ async function login() {
 }
 
 async function getProfile() {
+    const token = localStorage.getItem("token")
+
     const res = await fetch("/users/profile", {
         method: "GET",
         headers: {
-            "authorization" : "Bearer " + token
+            "Authorization" : "Bearer " + token
         }
     })
 
     const data = await res.json()
+    log(data)
 }
 
+const registerbtn = document.querySelector("button#register")
+registerbtn.addEventListener("click", register)
