@@ -45,7 +45,7 @@ exports.register = async ({ email, password }) => {
 
     //verifica se usuario existe
     const existingUser = await prisma.user.findUnique({
-        where : { email}
+        where : { email }
     })
 
     if (existingUser) {
