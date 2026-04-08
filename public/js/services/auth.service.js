@@ -1,5 +1,4 @@
-import api from "../api.js"
-
+import  api  from "../api.js"
 
 //LOGIN
 
@@ -17,7 +16,7 @@ export async function loginUser(email, password) {
 // REGISTER
 
 export async function registerUser(email, password) {
-    return api("/users/login", {
+    return api("/users/register", {
         method: "POST",
         body: JSON.stringify({
             email,
@@ -29,7 +28,7 @@ export async function registerUser(email, password) {
 //PERFIL AUNTENTICADO
 
 export async function getProfile() {
-    return api("users/profile")
+    return api("/users/profile")
 }
 
 //LOGOUT

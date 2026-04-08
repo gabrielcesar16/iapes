@@ -28,7 +28,7 @@ exports.login = async ({ email, password }) => {
         { id: user.id },
         process.env.JWT_SECRET,
         {
-            expiresIn: process.env.JWT_EXPIRES_IN
+            expiresIn: "1h"
         }
     )
     // Retorno com o token gerado e o email e senha
@@ -49,7 +49,7 @@ exports.register = async ({ email, password }) => {
     })
 
     if (existingUser) {
-        throw new Error("usuario ja existe")
+        throw new Error("Usuário já existe")
     }
 
     //hashar a senha

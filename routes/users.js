@@ -6,7 +6,7 @@ const authMiddleware = require("../middlewares/auth")
 
 const userController = require ("../controllers/userController")
 router.post("/login", userController.login)
-router.post("/", userController.register)
+router.post("/register", userController.register)
 router.get("/profile", authMiddleware, userController.getProfile)
 
 router.post("/", (req, res) => {

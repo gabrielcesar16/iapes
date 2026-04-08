@@ -1,4 +1,4 @@
-import { registerUser } from "../services/auth.service"
+import { registerUser } from "../services/auth.service.js"
 
 const form = document.querySelector("#registerForm")
 const output = document.querySelector("#output")
@@ -18,8 +18,19 @@ form.addEventListener("submit", async (event) => {
 
     try {
         const data = await registerUser(email, password)
+        
+        //Validação
+        if (data.error) {
+            log({
+                error: data.error
+            })
+            return
+        }
+        
         //Redirect
         window.location.href = "/pages/login.html"
+
+
     } catch (err) {
         log({
             error: err.message || "Erro no cadastro"

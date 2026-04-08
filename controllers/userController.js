@@ -6,6 +6,17 @@ exports.login = async (req, res) => {
         const data = await userService.login(req.body)
         res.json(data)
     } catch (err) {
+
+        if (
+            err.message === "Usuário não encontrado" ||
+            err.message === "Senha inválida"
+        ) {
+            //Erro de autenticação
+            return res.status(401).json({
+                error: err.message
+            })
+        }
+
         res.status(400).json({
             error: err.message
         })
@@ -17,6 +28,16 @@ exports.register = async (req, res) => {
         const data = await userService.register(req.body)
         res.status(201).json(data)
     } catch (err) {
+
+         if (
+            err.message === "Usuário já existe"
+        ) {
+            //Erro de autenticação
+            return res.status(409).json({
+                error: err.message
+            })
+        }
+
         console.error("REGISTER ERROR:",err)
         res.status(400).json({
             error: err.message

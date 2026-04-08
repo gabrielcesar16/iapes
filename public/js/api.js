@@ -1,6 +1,6 @@
 const API_URL = "http://localhost:3000"
 
-async function api(path, options = {}) {
+export default async function api(path, options = {}) {
     const token = localStorage.getItem("token")
 
 

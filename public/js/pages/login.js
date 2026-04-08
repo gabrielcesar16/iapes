@@ -1,4 +1,4 @@
-import { loginUser } from "../services/auth.service"
+import { loginUser } from "../services/auth.service.js"
 
 const form = document.querySelector("#loginForm")
 const output = document.querySelector("#output")
@@ -17,6 +17,14 @@ form.addEventListener("submit", async (event) => {
 
     try {
         const data = await loginUser(email, password)
+
+        //Validação
+        if (data.error) {
+            log({
+                error: data.error
+            })
+            return
+        }
 
         //Salvar
         localStorage.setItem("token", data.token)
