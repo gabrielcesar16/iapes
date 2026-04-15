@@ -1,9 +1,9 @@
-const pool = require("../config/db")
-const bcrypt = require("bcrypt")
-const jwt = require("jsonwebtoken")
-const prisma = require("../config/prisma")
+//import pool from "../config/db.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import prisma from "../config/prisma.js";
 
-exports.login = async ({ email, password }) => {
+const login = async ({ email, password }) => {
 
     //Busca o usuario
     const user = await prisma.user.findUnique({
@@ -41,7 +41,7 @@ exports.login = async ({ email, password }) => {
     }
 }
 
-exports.register = async ({ email, password }) => {
+const register = async ({ email, password }) => {
 
     //verifica se usuario existe
     const existingUser = await prisma.user.findUnique({
@@ -71,7 +71,7 @@ exports.register = async ({ email, password }) => {
     }
 }
 
-exports.getProfile = async (userId) => {
+ const getProfile = async (userId) => {
 
     const user = await prisma.user.findUnique({
         where: { id : userId},
@@ -87,4 +87,10 @@ exports.getProfile = async (userId) => {
 
     return user
 
+}
+
+export default {
+    login,
+    register,
+    getProfile
 }

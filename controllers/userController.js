@@ -1,7 +1,7 @@
-const userService = require("../services/userService")
-const bcrypt = require("bcrypt")
+import userService from "../services/userService.js";
+import bcrypt from "bcrypt";
 
-exports.login = async (req, res) => {
+const login = async (req, res) => {
     try{
         const data = await userService.login(req.body)
         res.json(data)
@@ -23,7 +23,7 @@ exports.login = async (req, res) => {
     }
 }
 
-exports.register = async (req, res) => {
+const register = async (req, res) => {
     try{
         const data = await userService.register(req.body)
         res.status(201).json(data)
@@ -47,7 +47,7 @@ exports.register = async (req, res) => {
     console.log("BODY:", req.body)
 }
 
-exports.getProfile = async (req, res) => {
+const getProfile = async (req, res) => {
     try{
         const user = await userService.getProfile(req.userId)
         res.json(user)
@@ -56,4 +56,10 @@ exports.getProfile = async (req, res) => {
             error: err.message
         })
     }
+}
+
+export default {
+    login,
+    register,
+    getProfile
 }

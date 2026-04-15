@@ -23,7 +23,14 @@ export default async function api(path, options = {}) {
     }
 
         const data = await res.json()
-        return data
+        
+        if (!res.ok) {
+           throw {
+            status: res.status,
+            ...data
+           }
+        }
 
+        return data
 }
 

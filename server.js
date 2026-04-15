@@ -1,8 +1,14 @@
-require("dotenv").config()
-const express = require("express")
-const cors = require("cors")
-const app = express()
+import dotenv from "dotenv"
+import express from "express"
+import cors from "cors"
 
+import userRoutes from "./routes/users.js"
+import chatRoutes from "./routes/chatRoutes.js"
+
+
+dotenv.config()
+
+const app = express()
 
 //BD import
 //const pool = require("./config/db")
@@ -20,8 +26,8 @@ app.use(cors())
 app.use(express.static("public"))
 
 //Route import
-const userRoutes = require("./routes/users")
 app.use("/users", userRoutes)
+app.use("/chat", chatRoutes)
 
 //Rota básica
 app.get("/", (req, res) =>{
