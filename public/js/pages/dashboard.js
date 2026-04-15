@@ -1,5 +1,9 @@
 import api from "../api.js"
 
+if (!localStorage.getItem("token")) {
+    window.location.href = "/pages/login.html";
+}
+
 async function init() {
 
     try {

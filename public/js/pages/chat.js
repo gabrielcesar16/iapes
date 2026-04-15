@@ -4,6 +4,8 @@ const chatDiv = document.getElementById("chat")
 const input = document.getElementById("inputChat")
 const btn = document.getElementById("inputChatBtn")
 
+
+
 async function sendMessage() {
 
     const message = input.value.trim();

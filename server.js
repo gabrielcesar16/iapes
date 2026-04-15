@@ -2,9 +2,12 @@ import dotenv from "dotenv"
 import express from "express"
 import cors from "cors"
 
+import authMiddleware from "./middlewares/auth.js"
+
 import userRoutes from "./routes/users.js"
 import chatRoutes from "./routes/chatRoutes.js"
 
+import path from "path"
 
 dotenv.config()
 
