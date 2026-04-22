@@ -1,0 +1,12 @@
+[
+  {
+    "nome": "Matemática",
+    "cargaHoraria": 80,
+    "semestre": 1
+  },
+  {
+    "nome": "Física",
+    "cargaHoraria": 60,
+    "semestre": 1
+  }
+]

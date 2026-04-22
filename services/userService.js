@@ -36,7 +36,7 @@ const login = async ({ email, password }) => {
         token,
         user: {
             id: user.id,
-            email: user.email
+            email: user.email 
         }
     }
 }
