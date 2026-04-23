@@ -6,6 +6,7 @@ export default async function api(path, options = {}) {
 
     //spread
     const res = await fetch (API_URL + path, {
+        cache: "no-store", // O que isso faz?
         headers: {
             "Content-Type": "application/json",
             ...(token && {

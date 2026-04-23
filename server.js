@@ -6,7 +6,7 @@ import authMiddleware from "./middlewares/auth.js"
 
 import userRoutes from "./routes/users.js"
 import chatRoutes from "./routes/chatRoutes.js"
-
+import disciplinaRoutes from "./routes/disciplinas.js"
 import path from "path"
 
 dotenv.config()
@@ -31,6 +31,7 @@ app.use(express.static("public"))
 //Route import
 app.use("/users", userRoutes)
 app.use("/chat", chatRoutes)
+app.use("/disciplinas", disciplinaRoutes)
 
 //Rota básica
 app.get("/", (req, res) =>{
