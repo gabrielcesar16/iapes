@@ -1,10 +1,10 @@
-import { sendMessageToAI } from "../services/chatService.js";
+import chatService from "../services/chatService.js";
 
 export async function chat(req, res) {
     try {
         const { message } = req.body
 
-        const reply = await sendMessageToAI(message)
+        const reply = await chatService.sendMessageToAI(message)
 
         res.json({ reply })
     
