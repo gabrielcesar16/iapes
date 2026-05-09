@@ -1,26 +1,44 @@
-import prisma from "../config/prisma.js"
+import prisma from "../config/prisma.js";
 
 const matricular = async (userId, disciplinaId) => {
-    try {
-        const registro = await prisma.alunoDisciplina.create({
-            data: {
+    return await prisma.alunoDisciplina.create({
+        data: { 
+            userId, 
+            disciplinaId
+        }
+    })
+}
+
+const cancelarMatricula = async (userId, disciplinaId) => {
+    return await prisma.alunoDisciplina.delete({
+        where: {
+            userId_disciplinaId: {
                 userId,
                 disciplinaId
             }
-        })
-
-        return registro
-
-    } catch (err) {
-        if (err.code === "P2002") {
-            throw new console.error("Você já está matriculado nessa disciplina");
-            
         }
+    })
+}
 
-        throw new Error("Erro ao matricular")
-    }
+const getMinhasMatriculas = async (userId) => {
+    return await prisma.alunoDisciplina.findMany({
+        where: {
+            userId
+        },
+        include: {
+            disciplina: {
+                select: {
+                    nome: true,
+                    cargaHoraria: true,
+                    semestre: true
+                }
+            }
+        }
+    })
+}
 
-    export default {
-        matricular
-    }
+export default {
+    matricular,
+    cancelarMatricula,
+    getMinhasMatriculas
 }

@@ -10,31 +10,56 @@ async function init() {
         const profile = await api("/users/profile")
         document.getElementById("userEmail").innerText = "Logado como: " + profile.email
 
+        await carregarMinhasDisciplinas()
         await carregarDisciplinas()
+      
 
     } catch (err) {
         console.error(err)
     }
     
 }
-
+    
+//Nojeira do caralho
 async function carregarDisciplinas() {
     const tabela = document.getElementById("tabelaDisciplinas")
     
     try {
-        const disciplinas = await api("/disciplinas")
-        console.log("DISCIPLINAS: ", disciplinas)
+        const [disciplinas, matriculas] = await Promise.all([
+            api("/disciplinas"),
+            api("/matriculas")
+        ])
+
+        const matriculaIds = new Set(matriculas.map( m => m.disciplinaId))
 
         tabela.innerHTML = ""
 
+  
         disciplinas.forEach( d => {
+            const jaMatriculado = matriculaIds.has(d.id)
             const tr = document.createElement("tr")
             tr.innerHTML = `
                 <td>${d.nome}</td>
                 <td>${d.cargaHoraria}</td>
                 <td>${d.semestre}</td>
+                <td>
+                    <button
+                        class='btn-matricular'
+                        data-id='${d.id}'
+                        ${jaMatriculado ? "disabled" : ""}
+                    >
+                        ${jaMatriculado ? "Matriculado" : "Me matricular"}
+                    </button>
+                </td>
+
             `
             tabela.appendChild(tr)
+        })
+
+
+
+        document.querySelectorAll(".btn-matricular").forEach( btn => {
+            btn.addEventListener("click", () => matricular(btn.dataset.id, btn))
         })
 
     } catch (err) {
@@ -44,6 +69,59 @@ async function carregarDisciplinas() {
             <td colspan="3">Erro ao carregar disciplinas</td>
         </tr>
         `
+    }
+}
+
+async function carregarMinhasDisciplinas() {
+    const tabela = document.getElementById("tabelaMatriculas")
+
+    try {
+        const matriculas = await api("/matriculas")
+
+        tabela.innerHTML = ""
+
+        if (matriculas.length === 0) {
+            tabela.innerHTML = '<tr><td colspan="6">Nenhuma matrícula ainda</td></tr>'
+            return
+        }
+
+        matriculas.forEach( m => {
+            const tr = document.createElement("tr")
+            tr.innerHTML = `
+            <td>${m.disciplina.nome}</td>
+            <td>${m.disciplina.cargaHoraria}</td>
+            <td>${m.disciplina.semestre}</td>
+            <td>${m.status}</td>
+            <td>${m.faltas}</td>
+            <td>${m.nota ?? "-"}</td>
+            `
+            tabela.appendChild(tr)
+        })
+    } catch (err) {
+        console.error(err)
+        tabela.innerHTML = '<tr><td colspan"6">Erro ao carregar matrículas</td></tr>'
+    }
+}
+
+async function matricular(disciplinaId, btn) {
+    try {
+        btn.disabled = true
+        btn.innerText = "Matriculando..."
+
+        await api("/matriculas", {
+            method: "POST",
+            body: JSON.stringify({
+                disciplinaId: Number(disciplinaId)
+            })
+        })
+
+        btn.innerHTML = "Matriculado"
+        await carregarMinhasDisciplinas()
+
+    } catch (err) {
+        btn.disabled = false
+        btn.innerText = "Me matricular"
+        alert(err.error || "Erro ao matricular")
     }
 }
 
