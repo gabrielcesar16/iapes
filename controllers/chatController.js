@@ -9,7 +9,7 @@ export async function chat(req, res) {
         res.json({ reply })
     
     } catch (error) {
-        console.error("GEMINI ERROR: ", error)
+        console.error("GROQ ERROR: ", error)
         
         // dev debug mode
         if (process.env.NODE_ENV === "development"){

@@ -125,6 +125,20 @@ async function matricular(disciplinaId, btn) {
     }
 }
 
+  const chatBtn = document.getElementById("chatBtn");
+  chatBtn.addEventListener("click", abrirChat)
+
+function abrirChat() {
+
+  const chat = document.getElementById("chat")  
+
+  if (chat.style.display === "none") {
+    chat.style.display = "block";
+  } else {
+    chat.style.display = "none";
+  }
+}
+
 
 //Logout
 document.getElementById("logoutBtn").addEventListener("click", () => {

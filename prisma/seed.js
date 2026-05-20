@@ -8,7 +8,7 @@ const prisma = new PrismaClient()
 
 async function main() {
     
-    const filePath = path.resolve("data/disciplinas.json")
+    const filePath = path.resolve("../data/disciplinas.json")
     
     const data = JSON.parse(
         fs.readFileSync(filePath, "utf-8")

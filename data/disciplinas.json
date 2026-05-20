@@ -1,12 +1,176 @@
+
 [
   {
-    "nome": "Matemática",
+    "nome": "Matemática Geral",
+    "cargaHoraria": 40,
+    "semestre": 1
+  },
+  {
+    "nome": "Sociedade Natureza e Diversidade Cultural",
+    "cargaHoraria": 40,
+    "semestre": 1
+  },
+  {
+    "nome": "Introdução a Redes de Computadores",
     "cargaHoraria": 80,
     "semestre": 1
   },
   {
-    "nome": "Física",
-    "cargaHoraria": 60,
+    "nome": "Sistemas Computacionais",
+    "cargaHoraria": 80,
     "semestre": 1
+  },
+  {
+    "nome": "Fundamentos de Sistemas Operacionais",
+    "cargaHoraria": 80,
+    "semestre": 1 
+  },
+
+
+
+
+
+  {
+    "nome": "IOT e Ubiquidade",
+    "cargaHoraria": 60,
+    "semestre": 2
+  },
+  {
+    "nome": "Organização de Computadores",
+    "cargaHoraria": 80,
+    "semestre": 2
+  },
+  {
+    "nome": "Arquitetura de Redes de Computadores",
+    "cargaHoraria": 60,
+    "semestre": 2
+  },
+  {
+    "nome": "Metodologia Cientifica",
+    "cargaHoraria": 40,
+    "semestre": 2
+  },
+  {
+    "nome": "Administração de redes em ambiente Windows",
+    "cargaHoraria": 80,
+    "semestre": 2
+  },
+  
+
+
+
+
+  {
+    "nome": "Banco de Dados",
+    "cargaHoraria": 80,
+    "semestre": 3
+  },
+  {
+    "nome": "Linguagem de Programação",
+    "cargaHoraria": 60,
+    "semestre": 3
+  },
+  {
+    "nome": "Infraestrutura de Redes e Datacenters",
+    "cargaHoraria": 80,
+    "semestre": 3
+  },
+  {
+    "nome":"Energias Renovaveis e TI Verde",
+    "cargaHoraria": 60,
+    "semestre": 3
+  }, 
+  {
+    "nome": "Administração de Redes em ambientes Linux",
+    "cargaHoraria": 80,
+    "semestre": 3
+  },
+
+   
+  
+
+  {
+    "nome": "Direito Digital e das Startups",
+    "cargaHoraria": 40,
+    "semestre": 4
+  },
+  {
+    "nome": "Segurança eletronica e automação comercial",
+    "cargaHoraria": 60,
+    "semestre": 4
+  },
+  {
+    "nome": "Segurança Cibernetica e Proteção de dados",
+    "cargaHoraria": 60,
+    "semestre": 4
+  },
+  {
+    "nome": "Cabeamento Estruturado de Redes",
+    "cargaHoraria": 80, 
+    "semestre": 4
+  },
+  {
+    "nome": "Gerência e Administração de Redes",
+    "cargaHoraria": 60,
+    "semestre": 4
+  },
+
+
+ 
+
+
+  {
+    "nome": "Cloud Computing",
+    "cargaHoraria": 60,
+    "semestre": 5 
+  },
+  {
+    "nome": "Desenvolvimento de Soluções para a Indústria",
+    "cargaHoraria": 60,
+    "semestre": 5
+  },
+  {
+    "nome": "Róbotica Educacional",
+    "cargaHoraria": 60,
+    "semestre": 5
+  },
+  {
+    "nome": "Telecom e arquitetura de Computadores",
+    "cargaHoraria": 80,
+    "semestre": 5
+  },
+  {
+    "nome": "Gestão da Inovação e Propriedade Intelectual",
+    "cargaHoraria": 40,
+    "semestre": 5
+  },
+   
+  
+
+  
+  {
+    "nome": "Inteligencia Artificial Aplicada a Negocios",
+    "cargaHoraria": 60,
+    "semestre": 6
+  },
+  {
+    "nome": "Tópicos Integradores em Redes",
+    "cargaHoraria": 60,
+    "semestre": 6
+  },
+  {
+    "nome": "Projeto Estruturado de Redes de Computadores",
+    "cargaHoraria": 60,
+    "semestre": 6
+  },
+  {
+    "nome": "Avaliação de Desempenho de Redes de Computadores",
+    "cargaHoraria": 80,
+    "semestre": 6
+  },
+  {
+    "nome": "Serviços de Redes TCP/IP",
+    "cargaHoraria": 60,
+    "semestre": 6
   }
 ]

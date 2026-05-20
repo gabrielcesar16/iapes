@@ -8,10 +8,10 @@
 <body>
 
     <div id="userEmail"></div>
+    <button id="logoutBtn">Config</button>
+    <br>
     <button id="logoutBtn">Sair</button>
     <br>
-    <a href="chat.html">Chatbot</a>
-   
     <h3>Minhas Disciplinas</h3>
     <table border="1">
         <thead>
@@ -39,6 +39,39 @@
         </thead>
         <tbody id="tabelaDisciplinas"></tbody>
     </table>
+
+    <button 
+        id = "chatBtn"
+        style="
+        position:fixed;
+        bottom:20px;
+        right:20px;
+        width:60px;
+        height:60px;
+    ">
+        ZÉ
+    </button>
+
+    <div id="chat" style="
+        display: none;
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        width: 280px;
+        height: 350px;
+        border: 1px solid black;
+        background: white;
+         padding: 10px;
+        ">
+             <iframe
+                src="chat.html"
+                width="100%"
+                height="100%"
+                style="border:none"
+            ></iframe>
+
+    </div>
+
 
     <script type="module" src="../js/pages/dashboard.js"></script>
 </body>
