@@ -147,4 +147,9 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
     window.location.href = "/pages/login.html"
 })
 
+document.getElementById("configBtn").addEventListener("click", () => {
+    window.location.href = "/pages/config.html"
+})
+
+
 init()

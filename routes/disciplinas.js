@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.get("/", async (req, res) => {
     try {
-        console.log("ROTA DISCIPLINAS OK")
+        //console.log("ROTA DISCIPLINAS OK")
         const disciplinas = await prisma.disciplina.findMany({
             orderBy: { semestre: "asc"}
         })

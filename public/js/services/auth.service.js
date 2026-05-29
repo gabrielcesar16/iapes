@@ -25,6 +25,22 @@ export async function registerUser(email, password) {
     })
 }
 
+//UPDATE
+
+export const updateProfile = async (email, password) => {
+    
+    const token = localStorage.getItem("token")
+
+    const body = {}
+    if (email) body.email = email
+    if (password) body.password = password
+
+    return api("/users/profile", {
+        method: "PUT",
+        body: JSON.stringify(body)
+    })
+}
+
 //PERFIL AUNTENTICADO
 
 export async function getProfile() {

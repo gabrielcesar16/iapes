@@ -89,8 +89,47 @@ const register = async ({ email, password }) => {
 
 }
 
+const updateProfile = async (userId, { email, password }) => {
+    
+    const user = await prisma.user.findUnique({
+        where: { id: userId }
+    })
+
+    if (!user) {
+        throw new Error("Usuário não econtrado")
+    }
+
+    // Verificar se o email já está em uso por outro usuario
+
+    if ( email && email !== user.email) {
+        const emailInUse = await prisma.user.findUnique({
+            where: { email }
+        })
+        if (emailInUse) {
+            throw new Error("Email já está em uso")
+        }
+    }
+
+    const data = {}
+
+    if (email) data.email = email
+    if (password) data.password = await bcrypt.hash(password, 10)
+    
+    const updated = await prisma.user.update({
+        where: { id: userId },
+        data,
+        select: {
+            id: true,
+            email: true
+        }
+    })
+
+    return updated
+}
+
 export default {
     login,
     register,
-    getProfile
+    getProfile,
+    updateProfile
 }
