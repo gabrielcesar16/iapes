@@ -64,7 +64,8 @@ const enterAssistantMode = () => {
     const opcoes = document.createElement("div")
     opcoes.id = "assistantOpcoes"
     opcoes.innerHTML = `
-        <button class="opcao-btn" data-acao="faltas"> Ver minhas faltas </button>
+        <button class="opcao-btn" data-acao="faltas"> Ver minhas faltas. </button>
+        <button class="opcao-btn" data-acao="faltasSobrando"> Quantas faltas tenho sobrando? </button>
     `
     chatDiv.appendChild(opcoes)
 
@@ -83,7 +84,7 @@ const exitAssistantMode = () => {
     const opcoes = document.getElementById("assistantOpcoes")
     if (opcoes) opcoes.remove()
 
-    chatDiv.innerHTML += `<p><i>Modo assistente encerrado.</i></p>`
+    chatDiv.innerHTML += `<p><b>IA:</b> Como posso ajudar? </p>`
     chatDiv.scrollTop = chatDiv.scrollHeight
 }
 
@@ -118,6 +119,45 @@ const handleOpcao = async (acao) => {
             loading.remove()
             chatDiv.innerHTML += `<p style="color: red;">Erro ao buscar faltas: ${err.error || err.message}</p>`
         }
+    }
+
+    if (acao === "faltasSobrando") {
+        chatDiv.innerHTML += `<p><b>Você:</b> Quantas faltas tenho sobrando?</p>`
+
+        const loading = document.createElement("p")
+        loading.innerHTML = "<i>Calculando...</i>"
+        chatDiv.appendChild(loading)
+
+        try {
+            const matriculas = await api("/matriculas")
+            loading.remove()
+
+            if (matriculas.length === 0 ) {
+                chatDiv.innerHTML += `<p><b>Assistente:</b> Você não possui matrículas no momento.</p>`
+            } else {
+                
+                let resposta = `<p><b>Assistente:</b> Faltas restantes por disciplina:<br>`
+                matriculas.forEach( m => {
+                  const horasPorAula = m.disciplina.cargaHoraria / 20
+                  const horasPermitidas = m.disciplina.cargaHoraria * 0.25
+                  const horasUsadas = m.faltas * horasPorAula
+                  const horasRestantes = horasPermitidas - horasUsadas
+                  const faltasRestantes = Math.floor(horasRestantes / horasPorAula)
+
+                  const status = horasRestantes <= 0
+                    ? `<span style="color:red"> Reprovado por falta!</span>`
+                    : `${faltasRestantes} faltas(s) - ${horasRestantes}h disponíveis`
+
+                    resposta += `<b>${m.disciplina.nome}</b>: ${status}<br>`
+                })
+                resposta += `</p>`
+                chatDiv.innerHTML += resposta
+            }
+        } catch (err) {
+            loading.remove()
+            chatDiv.innerHTML += `<p style ="color:red;">Erro: ${err.error || err.message}</p>`
+        }
+        
     }
 
     const acoes = document.createElement("div")

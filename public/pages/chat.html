@@ -4,13 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbot</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        h2 { margin: 0 0 8px 0; }
+
+        #controles {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 4px;
+        }
+
+        #chat {
+            flex: 1;
+            overflow-y: auto;
+        }
+    </style>
 </head>
 <body>
     <h2>Zé, Chatbot do Zéfiro</h2>
 
-    <input id="inputChat" placeholder="Digite sua mensagem..."/>
-    <button id="inputChatBtn">Enviar</button><button id="assistantChatBtn">🔄</button>
-
+    <div id="controles">
+         <input id="inputChat" placeholder="Digite sua mensagem..." style="flex:1"/>
+         <button id="inputChatBtn">Enviar</button>
+         <button id="assistantChatBtn">🔄</button>  
+    </div>
+   
     <div id="chat"></div>
 
     <script type="module" src="../js/pages/chat.js"></script>
